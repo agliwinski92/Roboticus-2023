@@ -19,9 +19,7 @@ void setup()
     pinMode(lewy_s, INPUT_PULLUP); // prawy silnik
 }
 
-// << KONFIG >>
-
-
+// pętla wykonująca zadanie
 
 void loop()
 {
@@ -31,8 +29,7 @@ void loop()
   
   // konwertujemy nasz tekst do tablicy char'ów
   toSend.toCharArray(msg, toSend.length() + 1); 
-  
-  
+    
   digitalWrite(led_pin, HIGH); 			// zapalamy LED
 
   vw_send((uint8_t *)msg, strlen(msg));		// wysyłamy 
