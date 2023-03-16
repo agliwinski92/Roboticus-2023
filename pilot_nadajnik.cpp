@@ -67,8 +67,7 @@ void loop()
   delay(1000); 						    // czekamy 1 sekundę
     
   // zerujemy statusy po wykonaniu operacji
-  int status_prawy_s = 0;
-  int status_lewy_s = 0;
+  int status_silnika = 0;
 
 }
 
