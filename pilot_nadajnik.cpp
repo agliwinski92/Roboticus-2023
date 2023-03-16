@@ -38,17 +38,16 @@ void loop()
   // ----------------------------- sprawdzamy stan przyciskow ------------------------------------------------
     
   if ((prawy_s == LOW) && (lewy_s == LOW)) // sprawdzamy czy oba przyciski są wcisniete, jeśli tak to:
-        { 
-            int status_silnika = 1; // ustawiamy status 1, ktory przeslemy do odbiornika
-        } 
-        else // jeśli nie został spełniony (przycisk nie jest wciśnięty) to:
-        { 
-            if ((prawy_s == LOW) && (lewy_s == HIGH)) // sprawdzamy czy przycisk prawego silnika jest wcisniety, jeśli tak to:
-            {
-            int status_silnika = 2; // ustawiamy status, ktory przeslemy do odbiornika
-            } else {
-            int status_silnika = 3; // ustawiamy status, ktory przeslemy do odbiornika
-            }
+    { 
+     int status_silnika = 1; // ustawiamy status 1, ktory przeslemy do odbiornika } 
+     else // jeśli nie został spełniony (przycisk nie jest wciśnięty) to:
+      { 
+      if ((prawy_s == LOW) && (lewy_s == HIGH)) // sprawdzamy czy przycisk prawego silnika jest wcisniety, jeśli tak to:
+      {
+                    int status_silnika = 2; // ustawiamy status, ktory przeslemy do odbiornika
+                 } else {
+                    int status_silnika = 3; // ustawiamy status, ktory przeslemy do odbiornika
+                 }
         }
     
    // ----------------------------- przesylamy sygnal za pomoca string [wiadomosc txt ] ------------------------------------------------ 
