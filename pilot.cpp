@@ -1,3 +1,4 @@
+
 // << KONFIG >>
 
 // podłączamy bibliotekę obsługi modułu komunikacji radiowej
@@ -20,7 +21,6 @@ void setup()
 }
 
 // << KONFIG >>
-
 
 
 
