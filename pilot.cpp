@@ -1,10 +1,9 @@
+// konfiguracja ustawień
 
-// << KONFIG >>
+#include <VirtualWire.h> // podłączamy bibliotekę obsługi modułu komunikacji radiowej
 
-// podłączamy bibliotekę obsługi modułu komunikacji radiowej
-#include <VirtualWire.h> 
+// definiujemy piny
 
-// definiujemy piny 
 #define led_pin 11
 #define transmit_pin 10
 #define prawy_s 5
