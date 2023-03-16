@@ -1,24 +1,21 @@
 #include <VirtualWire.h>
 
-#define led_pin 13
-#define receive_pin 11
+#define led_pin 13		// pin leda informacyjnego czy kod działa
+#define receive_pin 11 		// pin odbioru danych
 
 
 void setup()
 {
-    Serial.begin(9600);
-    Serial.println("setup");
-// przygotowujemy potrzebne informacje dla biblioteki
+
     vw_set_rx_pin(receive_pin);
     vw_setup(2000);	 
     vw_rx_start(); // startujemy odbieranie danych (uruchamiamy)
-
     pinMode(led_pin, OUTPUT);
 }
 
 void loop()
 {
-  // częśc wymagana do poprawnego działania biblioteki
+     // częśc wymagana do poprawnego działania biblioteki
     uint8_t buf[VW_MAX_MESSAGE_LEN];
     uint8_t buflen = VW_MAX_MESSAGE_LEN;
 
