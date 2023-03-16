@@ -34,3 +34,29 @@ void loop()
         digitalWrite(led_pin, LOW); // gasimy LED
     }
 }
+
+
+
+
+
+
+    if (vw_get_message(buf, &buflen)) // jeśli odbierzemy dane
+    {
+	int i,pwm,wartosc;
+        String liczba;
+
+        digitalWrite(led_pin, HIGH); //zapalamy LED
+       // w pętli zczytujemy dane z odbiornika 
+        for (i = 0; i < buflen; i++) 
+        {
+          liczba+=char(buf[i]); // wiadomość
+        }
+        	
+        wartosc = liczba.toInt();
+        pwm = map(wartosc,0,1023,0,255);
+	Serial.print(wartosc);// Debug
+        Serial.print("   ");
+        Serial.println (pwm);
+        analogWrite(pwm_pin, pwm);
+        digitalWrite(led_pin, LOW); // gasimy LED
+
