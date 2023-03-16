@@ -7,10 +7,14 @@
 #define prawy_s 5
 #define lewy_s 6
 
-// definiujemy zmienne które będą nam mówić jaki jest status przycisku
+// definiujemy zmienne które będą nam mówić jaki jest status silnika:
 
-int status_prawy_s = 0;
-int status_lewy_s = 0;
+// status_silnika = 0 [ oznacza ze jest wylaczony ]
+// status_silnika = 1 [ oznacza ze pracuja oba silniki ]
+// status_silnika = 2 [ oznacza ze pracuje tylko prawy ]
+// status_silnika = 3 [ oznacza ze pracuj3 tylko lewy  ]
+
+int status_silnika = 0;
 
 // definiujemy ustawienia pinów
 
@@ -35,23 +39,22 @@ void loop()
     
   if ((prawy_s == LOW) && (lewy_s == LOW)) // sprawdzamy czy oba przyciski są wcisniete, jeśli tak to:
         { 
-            int status_prawy_s = 1; // ustawiamy status 1, ktory przeslemy do odbiornika
-            int status_lewy_s = 1; // ustawiamy status 1, ktory przeslemy do odbiornika
+            int status_silnika = 1; // ustawiamy status 1, ktory przeslemy do odbiornika
         } 
         else // jeśli nie został spełniony (przycisk nie jest wciśnięty) to:
         { 
             if ((prawy_s == LOW) && (lewy_s == HIGH)) // sprawdzamy czy przycisk prawego silnika jest wcisniety, jeśli tak to:
             {
-            int status_prawy_s = 1; // ustawiamy status 1, ktory przeslemy do odbiornika
+            int status_silnika = 2; // ustawiamy status, ktory przeslemy do odbiornika
             } else {
-            int status_lewy_s = 1; // ustawiamy status 1, ktory przeslemy do odbiornika
+            int status_silnika = 3; // ustawiamy status, ktory przeslemy do odbiornika
             }
         }
     
    // ----------------------------- przesylamy sygnal za pomoca string [wiadomosc txt ] ------------------------------------------------ 
   
-  String toSend = (String(prawy_s, DEC) + String(lewy_s, DEC));         // tresc wiadomości, czyli statusy przysków silników
-  char msg[5]; 					                                        // tworzymy tablicę typu char o nazwie [msg] o wielkosci [5 znakow]
+  String toSend = (String(status_silnika, DEC));         // tresc wiadomości, czyli statusy przysków silników
+  char msg[2]; 					                         // tworzymy tablicę typu char o nazwie [msg] o wielkosci [2 znakow]
   
   toSend.toCharArray(msg, toSend.length() + 1);  // konwertujemy nasz tekst do tablicy char'ów   
     
