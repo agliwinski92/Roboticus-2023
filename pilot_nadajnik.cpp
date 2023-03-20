@@ -4,8 +4,6 @@
 
 #define transmit_pin 10
 #define led_pin 11
-#define prawy_s 5
-#define lewy_s 6
 
 // definiujemy zmienne które będą nam mówić jaki jest status silnika:
 
@@ -20,14 +18,15 @@ int status_silnika = 0;
 
 void setup()
 {
+  Serial.begin(9600); // open the serial port at 9600 bps:
     // przygotowujemy potrzebne informacje dla biblioteki
     vw_set_tx_pin(transmit_pin);
     vw_setup(2000);
     
     pinMode(led_pin, OUTPUT); // led do informacji czy urządzenie działa [pin 11]
     
-    pinMode(prawy_s, INPUT_PULLUP); // obsługa prawego silnika [pin 5]
-    pinMode(lewy_s, INPUT_PULLUP); // obsługa lewego silnika [pin 6]
+    pinMode(5, INPUT_PULLUP); // obsługa prawego silnika [pin 5]
+    pinMode(6, INPUT_PULLUP); // obsługa lewego silnika [pin 6]
 }
 
 // pętla wykonująca zadanie
@@ -37,18 +36,18 @@ void loop()
     
   // ----------------------------- sprawdzamy stan przyciskow ------------------------------------------------
     
-  if ((prawy_s == LOW) && (lewy_s == LOW)) // sprawdzamy czy oba przyciski są wcisniete, jeśli tak to:
-    { 
-     int status_silnika = 1; // ustawiamy status 1, ktory przeslemy do odbiornika } 
-     else // jeśli nie został spełniony (przycisk nie jest wciśnięty) to:
-      { 
-      if ((prawy_s == LOW) && (lewy_s == HIGH)) // sprawdzamy czy przycisk prawego silnika jest wcisniety, jeśli tak to:
-      {
-                    int status_silnika = 2; // ustawiamy status, ktory przeslemy do odbiornika
-                 } else {
-                    int status_silnika = 3; // ustawiamy status, ktory przeslemy do odbiornika
+if ((digitalRead(5) == LOW) && (digitalRead(6) == LOW))             // sprawdzamy czy oba przyciski są wcisniete, jeśli tak to:
+    { status_silnika = 1; }                                         // ustawiamy status 1, ktory przeslemy do odbiornika 
+    else {                                                          // jeśli nie został spełniony (przyciski nie są wciśnięte) to:
+         if ((digitalRead(5) == LOW) && (digitalRead(6) == HIGH))   // sprawdzamy czy przycisk prawego silnika jest wcisniety, jeśli tak to:
+            { status_silnika = 2; }                                   
+            else {
+                 if ((digitalRead(5) == HIGH) && (digitalRead(6) == LOW))
+                    { status_silnika = 3; }
+                 else 
+                    { status_silnika = 0;}          
                  }
-        }
+         }
     
    // ----------------------------- przesylamy sygnal za pomoca string [wiadomosc txt ] ------------------------------------------------ 
   
@@ -63,13 +62,15 @@ void loop()
   vw_wait_tx(); 
 
   digitalWrite(led_pin, LOW); 			// gasimy LED
-  delay(1000); 						    // czekamy 1 sekundę
-    
+  delay(500); 						    // czekamy 1 sekundę
+  
+  Serial.print("Status: ");
+  Serial.println(status_silnika);
+
   // zerujemy statusy po wykonaniu operacji
-  int status_silnika = 0;
+  status_silnika = 0;
 
 }
-
 
 
 
