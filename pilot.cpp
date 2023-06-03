@@ -14,25 +14,23 @@ void loop() {
    if (irrecv.decode(&results)) {
 
       switch (results.value) {
-         case 0x143226DB:
-            Serial.println("w lewo");
+         case 0x10:
+            digitalWrite(silnik_prawy, HIGH);
+            digitalWrite(silnik_lewy, HIGH);
             break;
 
-         case 0xE0984BB6:
-            Serial.println("w gore");
+         case 0x16:
+            digitalWrite(silnik_prawy, HIGH);
             break;
 
-         case 0x39D41DC6:
-            Serial.println("w prawo");
+         case 0x15:
+            digitalWrite(silnik_lewy, HIGH);
             break;
 
-         case 0x371A3C86:
-            Serial.println("w dol");
-            break;
-
-         case 0xA32AB931:
-            Serial.println("srodek");
-            break;
+         default:
+		      digitalWrite(silnik_prawy, LOW);
+            digitalWrite(silnik_lewy, LOW);
+        	   break;
          }
 
    irrecv.resume();
