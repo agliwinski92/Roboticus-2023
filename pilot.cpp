@@ -17,18 +17,24 @@ void loop() {
          case 0x10:
             digitalWrite(silnik_prawy, HIGH);
             digitalWrite(silnik_lewy, HIGH);
+	    delay(250);
+            irrecv.resume();
             break;
 
          case 0x16:
             digitalWrite(silnik_prawy, HIGH);
+		      delay(250);
+            irrecv.resume();
             break;
 
          case 0x15:
             digitalWrite(silnik_lewy, HIGH);
+            delay(250);
+            irrecv.resume();
             break;
 
          default:
-		      digitalWrite(silnik_prawy, LOW);
+            digitalWrite(silnik_prawy, LOW);
             digitalWrite(silnik_lewy, LOW);
         	   break;
          }
